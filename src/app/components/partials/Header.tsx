@@ -13,8 +13,8 @@ const Header = () => {
     ] 
   return (
     <>
-<>
-<Navbar  expand="lg" className="bg-body-tertiary mb-3">
+<header className='position-sticky top-0 bg-white' style={{zIndex:'9'}}>
+<Navbar  expand="lg" className="bg-white ">
           <Container fluid>
             <Navbar.Brand href="/"><Image src="/images/webapp-logo.png"  alt ="logo" width={149} height={40} /> </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand}`} />
@@ -38,15 +38,15 @@ const Header = () => {
                 
                
                 </Nav>
-                <Stack direction="horizontal" gap={0}>
-                    <Link href="/" className='btns  btn_md border-0 gray-text'>Schedule demo</Link>
-                    <Link href="/" className='btns btn_md btn_primary'>Get started</Link>
+                <Stack direction="horizontal" gap={0} className='flex-lg-row flex-column align-items-start gap-lg-0 gap-2'>
+                    <Link href="/" className='btns  btn_transparent btn_md border-0 gray-text ps-lg-3 ps-0 justify-content-start'>Schedule Demo</Link>
+                    <Link href="/" className='btns btn_md btn_primary'>Get Started</Link>
                 </Stack>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-    </>
+    </header>
     </>
   )
 }
