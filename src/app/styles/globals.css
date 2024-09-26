@@ -1,0 +1,187 @@
+:root {
+  scroll-behavior: smooth;
+  
+  /*-------------colors---------- */
+  --primary-color:#EF6820;
+  --dark-color:#252422;
+  --heading-color:#252422 ;
+  --gray-color: #475467;
+  --white-color:#ffffff ;
+  /* --secondary-color: #475467; */
+  /* --link-color: ;
+  --highlight-color: #475467;
+
+  --heading-color:#252422 ;
+  --heading-color:#222222 ;
+  --body-color: ;
+  --border-width:1px; */
+  /*-------------font size--------------- */
+  /* --fs-xs: clamp(11px, 1vw, 12px); */
+  --fs-xs: clamp(12px, 1vw, 14px);
+  --fs-sm: clamp(13px, 1.4vw, 16px);
+  --fs-base: clamp(13px, 1.4vw, 18px);
+  --fs-md: clamp(14px, 2vw,  28px); 
+  --fs-lg: clamp(14.5px, 2.5vw, 32px); 
+  --fs-xl: clamp(15px, 3vw 40px); 
+  --fs-2xl: clamp(32px, 4vw, 52px);
+}
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+}
+/*---------------- font size css ------------------------- */
+/* .fs-8xl {
+  font-size: var(--fs-8xl);
+}
+.fs-7xl {
+  font-size: var(--fs-7xl);
+}
+.fs-6xl {
+  font-size: var(--fs-6xl);
+}
+.fs-5xl {
+  font-size: var(--fs-5xl);
+}
+.fs-4xl {
+  font-size: var(--fs-4xl);
+}
+.fs-3xl {
+  font-size: var(--fs-3xl);
+} */
+.fs-2xl {
+  font-size: var(--fs-2xl);
+}
+.fs-xl {
+  font-size: var(--fs-xl);
+}
+.fs-lg {
+  font-size: var(--fs-lg);
+}
+.fs-md {
+  font-size: var(--fs-md);
+}
+.fs-base {
+  font-size: var(--fs-base);
+}
+.fs-sm {
+  font-size: var(--fs-sm);
+ }
+/* --------section title---------------- */
+.section-sm-title {
+  font-size: var(--fs-base);
+}
+.section-md-title {
+  font-size: var(--fs-md);
+}
+.section-xl-title {
+  font-size: var(--fs-xl);
+}
+.section-title {
+  font-size: var(--fs-2xl);
+  margin-bottom: clamp(1.375rem, 0.8659rem + 2.5455vw, 3.125rem); 
+}
+.section-head {
+  margin-bottom: clamp(1.375rem, 0.8659rem + 2.5455vw, 3.125rem); 
+  text-align: center;
+}
+
+a{text-decoration: none;}
+/* -------------------------- */
+
+ h1, h2, h3, h4, h5, h6, .section-head .section-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--heading-color);
+}
+
+
+p{
+  font-size: var(--fs-base);
+  color: var(--body-color);
+ 
+}
+p:not(:last-child){ margin-bottom: 1rem;}
+/*---------------- color css ------------------------- */
+.primary-text {
+  color: rgba(var(--primary-color), .4);
+}
+.secondary-text {
+  color: var(--secondary-color);
+}
+.gray-text {
+  color: var(--gray-color);
+}
+.heading-text {
+  color: var(--heading-color);
+}
+.body-text {
+  color: var(--body-color);
+}
+/* background color */
+.primary-bg {
+  background: var(--primary-color);
+}
+.secondary-bg {
+  background: var(--secondary-color);
+}
+/*---------------- btn css---------- */
+.btns {
+  font-size: clamp(16px, 1.4vw, 16px);
+  font-weight: 500;
+  line-height: 1.6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: baseline;
+  -moz-column-gap: 0.25rem;
+  column-gap: 0.25rem;
+  white-space: nowrap;
+  height: clamp(40px, 3.5vw, 50px);
+  padding-inline:clamp(36px,  3.8vw, 50px);
+  border-radius: 4px;
+  border-width: 1px ;
+  border-style: solid;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  --_button-hover:var(--hover, red);
+  --_button-text:var(--button-text, #000);
+}
+.btns:not(:last-child) {margin-right: clamp(14px, 1.6vw, 20px);}
+
+.btn_md{
+  height: clamp(40px, 9px + 3.8vw, 42px);
+  padding-inline:clamp(10px,  2vw, 20px);
+
+}
+.btn-sm{
+  font-size:var(--fs-sm) ;
+  height: clamp(46px, 9px + 3.8vw, 54px);
+}
+.btn:hover{
+  background-color: var(--_button-hover);
+  border-color: var(--_button-hover);
+  color: var(--_button-text);
+}
+.btn_primary {
+    color: var(--white-color);
+    background: var(--primary-color);
+    border-color: #F38744;
+    --hover:#f35f0f;  
+}
+.btn_primary_outline {
+  color:  var(--primary-color);;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+--hover:#f35f0f;
+--button-text:var(--white-color)
+}
