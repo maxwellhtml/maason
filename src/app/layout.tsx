@@ -7,6 +7,8 @@ import Header from "./components/partials/Header";
 // import "@/app/styles/globals.css";
 import "../app/styles/globals.css"
 import "../app/styles/style.css"
+import "../app/styles/footer.css"
+import "../app/styles/custom.css"
  
 const inter = Inter({ subsets: ['latin'] })
  
