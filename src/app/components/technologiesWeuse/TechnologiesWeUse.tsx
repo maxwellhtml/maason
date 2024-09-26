@@ -23,7 +23,7 @@ const TechnologiesWeUse = () => {
       alt: 'java',
       title: 'Java',
       link: {
-        url: '/hire-java-developers',
+        url: '/',
       },
     },
     {
@@ -32,7 +32,7 @@ const TechnologiesWeUse = () => {
       alt: 'Python',
       title: 'Python',
       link: {
-        url: '/python-web-development',
+        url: '/',
       },
     },
     {
@@ -53,7 +53,7 @@ const TechnologiesWeUse = () => {
       alt: 'react',
       title: 'React',
       link: {
-        url: '/hire-reactjs-developers',
+        url: '/',
       },
     },
     {
@@ -62,7 +62,7 @@ const TechnologiesWeUse = () => {
       alt: 'Angular',
       title: 'Angular',
       link: {
-        url: '/hire-angularjs-developers',
+        url: '/',
       },
     },
     {
@@ -77,7 +77,7 @@ const TechnologiesWeUse = () => {
       alt: 'Django',
       title: 'Django',
       link: {
-        url: '/hire-django-developers',
+        url: '/',
       },
     },
     {
@@ -123,7 +123,7 @@ const TechnologiesWeUse = () => {
       alt: 'MongoDB',
       title: 'MongoDB',
       link: {
-        url: '/mongodb-development-company',
+        url: '/',
       },
     },
     {
@@ -139,7 +139,7 @@ const TechnologiesWeUse = () => {
       alt: 'Docker',
       title: 'Docker',
       link: {
-        url: '/docker-golang-development',
+        url: '/',
       },
     },
     {
@@ -166,7 +166,7 @@ const TechnologiesWeUse = () => {
       alt: 'Android',
       title: 'Android',
       link: {
-        url: '/hire-android-app-developers',
+        url: '/',
       },
     },
     {
@@ -175,7 +175,7 @@ const TechnologiesWeUse = () => {
       alt: 'iOS',
       title: 'iOS',
       link: {
-        url: '/hire-iphone-app-developers',
+        url: '/',
       },
     },
     {
@@ -184,7 +184,7 @@ const TechnologiesWeUse = () => {
       alt: 'React Native',
       title: 'React Native',
       link: {
-        url: '/hire-react-native-developers',
+        url: '/',
       },
     },
     {
@@ -193,7 +193,7 @@ const TechnologiesWeUse = () => {
       alt: 'Flutter',
       title: 'Flutter',
       link: {
-        url: '/hire-flutter-developers',
+        url: '/',
       },
     },
     {
@@ -214,7 +214,7 @@ const TechnologiesWeUse = () => {
       alt: 'Vue.js',
       title: 'Vue.js',
       link: {
-        url: '/hire-vuejs-developers',
+        url: '/',
       },
     },
     {
@@ -223,7 +223,7 @@ const TechnologiesWeUse = () => {
       alt: 'Node.js',
       title: 'Node.js',
       link: {
-        url: '/hire-nodejs-developers',
+        url: '/',
       },
     },
     {
@@ -268,7 +268,7 @@ const TechnologiesWeUse = () => {
       alt: 'Ethereum',
       title: 'Ethereum',
       link: {
-        url: '/ethereum-dapp-development-company',
+        url: '/',
       },
     },
     {
