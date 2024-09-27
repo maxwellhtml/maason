@@ -6,7 +6,10 @@ import Header from "./components/partials/Header";
 // import "@/app/styles/globals.css";
 import "../app/styles/globals.css"
 import "../app/styles/style.css"
+import "../app/styles/footer.css"
+import "../app/styles/custom.css"
 import { Inter } from 'next/font/google'
+import Footer from "./components/partials/Footer";
 
 
  
@@ -38,6 +41,7 @@ export default function RootLayout({
       <body>
         <Header/>
         {children}
+        <Footer />
       </body>
     </html>
     </>

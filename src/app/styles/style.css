@@ -298,3 +298,12 @@ button:focus,
     left: 18%;
 }
 }
+
+/*  */
+.react-international-phone-input{width: 100% !important; border: none !important;}
+button.react-international-phone-country-selector-button {
+  border: none !important; height: auto !important;
+}
+button.react-international-phone-country-selector-button:hover {
+  background: transparent !important;
+}

@@ -9,31 +9,93 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LuChevronRight, LuChevronLeft } from "react-icons/lu";
 import { FaCircleCheck } from "react-icons/fa6";
+import RecentWork from "./components/RecentWork";
+import TechnologiesWeUse from "./components/technologiesWeuse/TechnologiesWeUse";
+import ResourceHire from "./components/ResourceHire";
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  services: string;
+}
 
-
-
-
+interface FormErrors {
+  name?: boolean;
+  email?: boolean;
+  phone?: boolean;
+  services?: boolean;
+}
 export default function Home() {
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [error, setError] = useState<FormErrors>({});
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     services: ''
   });
 
+  const validateForm = () => {
+    const updatedFormData = { ...formData, phone };
+    let formErrors: FormErrors = {};
+
+    if (!updatedFormData.name) formErrors.name = true;
+    if (!updatedFormData.email || !/\S+@\S+\.\S+/.test(updatedFormData.email)) {
+      formErrors.email = true;
+    }
+    if (!updatedFormData.phone || updatedFormData.phone.length < 10) {
+      formErrors.phone = true;
+    }
+    if (!updatedFormData.services) formErrors.services = true;
+
+    setError(formErrors);
+    return Object.keys(formErrors).length === 0; // Return true if no errors
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-};
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    // Handle form submission here (API call, etc.)
-    console.log(formData);
+    if (!validateForm()) return; // Only proceed if the form is valid
+
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateForm()) return; // Only proceed if the form is valid
+
+    setLoading(true);
+
+    // Prepare the updated form data
+    const updatedFormData = { ...formData, phone };
+
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+      const json = await response.json();
+      if (response.ok) {
+        setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            services: ''
+        });
+        setPhone(''); // Clear the phone input here
+    } else {
+        // Handle the error response if necessary
+    }
+    console.log(json);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false); // Ensure loading is false on completion
+    }
+  };
   var settings = {
     dots: false,
-    arrows:true,
+    arrows: true,
     infinite: false,
     speed: 500,
     slidesToShow: 1,
@@ -42,37 +104,37 @@ export default function Home() {
     nextArrow: <LuChevronRight />,
   };
 
-// service list
+  // service list
   const services = [
     {
       title: "Application Services",
       description: "Streamline operations, enhance user experience, and optimize performance with our tailored application services for your business needs.",
       list: ['Application Development', 'Application Maintenance & Security', 'Software Product Engineering', 'Enterprise App Integration', 'QA & Testing', 'Frontend Development', 'Backend Development'],
       image: '/images/application.jpg',
-      alt:'aplication'
+      alt: 'aplication'
     },
     {
       title: "Technology Advisory",
       description: "Stay ahead of the curve with our expert technology advisory services, leading you through innovation and strategic implementation.",
       list: ['Microsoft', 'AWS', 'SAAS', 'Mobile Solutions', 'Cyber Security'],
       image: '/images/technology-advisory.jpg',
-      alt:'aplication'
+      alt: 'aplication'
     },
     {
       title: "Data Engineering",
       description: "Strengthen your data infrastructure with our expert data engineering solutions, enabling efficient processing for actionable insights and strategic decision-making.",
       list: ['Business Consulting', 'Data Analytics Consulting', 'Big Data Solutions'],
       image: '/images/data-engineering.jpg',
-      alt:'Data Engineering'
+      alt: 'Data Engineering'
     },
     {
       title: "Managed IT Services",
       description: "Maximize operational efficiency with our Managed IT Services, offering comprehensive support and solutions tailored to your business's unique needs.",
       list: ['Ecommerce Website Development', 'Healthcare App Development', 'Cloud Technologies', 'DevOps Tools & Technologies', 'Internet of Things', 'Block Chain', 'AR/VR'],
       image: '/images/managed-services.jpg',
-      alt:'Managed IT Services'
+      alt: 'Managed IT Services'
     },
-   
+
   ];
   return (
     <>
@@ -98,55 +160,58 @@ export default function Home() {
                   <div className="form-group mb-3">
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${error.name ? 'is-invalid' : ''}`}
                       placeholder="Your Name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      required
                     />
+                    {error.name && <div className="invalid-feedback">Name is required</div>}
                   </div>
                   <div className="form-group mb-3">
                     <input
                       type="email"
-                      className="form-control"
+                      className={`form-control ${error.email ? 'is-invalid' : ''}`}
                       placeholder="Email Address"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
                     />
+                    {error.email && <div className="invalid-feedback">Invalid email address</div>}
                   </div>
+
                   <div className="form-group mb-3">
-                    <input
-                      type="tel"
-                      className="form-control"
-                      placeholder="Phone Number"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
+                    <PhoneInput
+                        // country='IN' 
+                      defaultCountry="in"
+                      className={`form-control align-items-center ${error.phone ? 'is-invalid' : ''}`}
+                      value={phone}
+                      onChange={(phone) => setPhone(phone)}
                     />
+                    {error.phone && <div className="invalid-feedback">Invalid phone number</div>}
                   </div>
+
                   <div className="form-group mb-4">
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${error.services ? 'is-invalid' : ''}`}
                       placeholder="Services"
                       name="services"
                       value={formData.services}
                       onChange={handleChange}
-                      required
                     />
+                    {error.services && <div className="invalid-feedback">Service is required</div>}
                   </div>
+
                   <div className="text-center">
                     <button type="submit" className="btns btn_primary mx-auto text-center">
-                      Send
+                      {loading ? 'Sending' : "Send"}
                     </button>
                   </div>
                 </form>
               </div>
             </Col>
+
 
           </Row>
 
@@ -180,7 +245,7 @@ export default function Home() {
         <Container className="xl">
           <Row>
             <Col xl={9} md={10} className="mx-auto text-center">
-              <h2 className="section-title">
+              <h2 className="section-title ">
                 Growing Businesses Since 2008
               </h2>
               <p>We offer website design, development and digital marketing services that meet your unique needs. Our eight-year experience helps us to provide high quality time-tested service for our clients. We work closely with our clients to understand their goals and then create custom strategies to achieve their objectives.</p>
@@ -203,48 +268,53 @@ export default function Home() {
         <div className="container-xl">
           <Row className="justify-content-center">
             <Col xl={9} md={10} className="mx-auto text-center">
-              <h2 className="section-title mb-0">
-              Our Services
+              <h2 className="section-title mb-lg-3 mb-mb-3">
+                Our Services
               </h2>
               <p>Transformative software development services, uniquely designed to match your specific requirements and powered by AI to deliver intelligent solutions.</p>
 
             </Col>
             <Col xl={12} md={12} className="mx-auto">
-{/* <Stack direction="horizontal" gap={20}> */}
-<Slider {...settings}>
-{services.map((item, index) => (
-  <div className="pb-xl-5 px-xl-5 pt-0">
-  <div  className="service-wrapper row  justify-content-between" key={index}>
-    <div className="col-xl-5 col-lg-6 col-md-6">
-    <div className="service-content">
+              {/* <Stack direction="horizontal" gap={20}> */}
+              <Slider {...settings}>
+                {services.map((item, index) => (
+                  <div className="pb-xl-5 px-xl-5 pt-0">
+                    <div className="service-wrapper row  justify-content-between" key={index}>
+                      <div className="col-xl-5 col-lg-6 col-md-6">
+                        <div className="service-content">
 
-      <h3>{item.title}</h3>
-      <p className="description">{item.description}</p>
-      <ul className="gap-lg-3 gap-2 d-flex flex-column pt-md-3 pb-sm-3 pb-5">
-        {item.list.map((listing, i) => (
-          <li key={i}><FaCircleCheck style={{color:'#0CA55B', width:'14px'}} />          {listing}</li>
-        ))}
-      </ul>
-    </div>
-    </div>
-    <div className="col-xl-5 col-lg-6 col-md-6">
-    <div className="service-img">
+                          <h3>{item.title}</h3>
+                          <p className="description">{item.description}</p>
+                          <ul className="gap-lg-3 gap-2 d-flex flex-column pt-md-3 pb-sm-3 pb-5">
+                            {item.list.map((listing, i) => (
+                              <li key={i}><FaCircleCheck style={{ color: '#0CA55B', width: '14px' }} />          {listing}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-xl-5 col-lg-6 col-md-6">
+                        <div className="service-img">
 
-      <Image src={item.image} alt={item.alt} width={408} height={388} />
-    </div>
-    </div>
-  </div>
-  </div>
-))}
-  </Slider>
+                          <Image src={item.image} alt={item.alt} width={408} height={388} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
 
-{/* </Stack> */}
+              {/* </Stack> */}
 
             </Col>
           </Row>
 
         </div>
       </section>
+
+
+      <RecentWork />
+      <TechnologiesWeUse />
+      <ResourceHire />
     </>
   );
 }
