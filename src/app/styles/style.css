@@ -83,7 +83,7 @@ button:focus,
   border-radius: 12px;
 }
 
-.stat-number {
+.stat-number,.stat-sign {
   font-size: 40px;
   font-weight: 600;
   color: var(--heading-color);
@@ -300,7 +300,7 @@ button:focus,
 }
 
 /*  */
-.react-international-phone-input{width: 100% !important; border: none !important;}
+.react-international-phone-input{width: 100% !important; border: none !important;font-size: 1rem !important;}
 button.react-international-phone-country-selector-button {
   border: none !important; height: auto !important;
 }

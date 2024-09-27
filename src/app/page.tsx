@@ -1,8 +1,10 @@
 'use client'
 import Image from "next/image";
+import { CountUp } from 'countup.js';
+
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import Link from "next/link";
-import { useState } from "react";
+import { useState,useRef, useEffect } from "react";
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -93,6 +95,42 @@ export default function Home() {
       setLoading(false); // Ensure loading is false on completion
     }
   };
+
+
+  // counter function
+  const statsRef = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && !hasAnimated) {
+        animateCounters();
+        setHasAnimated(true); // Ensure the animation only happens once
+      }
+    }, { threshold: 0.3 });
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, [hasAnimated]);
+
+  const animateCounters = () => {
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach((counter) => {
+      const endValue = counter.getAttribute('data-value') ?? '0';
+      const countUp = new CountUp(counter as HTMLElement, parseInt(endValue));
+      countUp.start();
+    });
+  };
+
+
   var settings = {
     dots: false,
     arrows: true,
@@ -181,7 +219,7 @@ export default function Home() {
                   </div>
 
                   <div className="form-group mb-3">
-                    <PhoneInput
+                    <PhoneInput style={{fontSize:'1rem'}}
                         // country='IN' 
                       defaultCountry="in"
                       className={`form-control align-items-center ${error.phone ? 'is-invalid' : ''}`}
@@ -218,7 +256,7 @@ export default function Home() {
         </Container>
       </section>
       {/* counter */}
-      <div className="container-xl ">
+      {/* <div className="container-xl ">
         <div className="stats-container">
           <div className="row text-center align-items-center gy-4">
             <div className="col-md-3 col-6">
@@ -239,7 +277,44 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div> */}
+
+<div className="container-xl ">
+      <div className="stats-container" ref={statsRef}>
+        <div className="row text-center align-items-center gy-4">
+          <div className="col-md-3 col-6">
+            <div className="d-flex justify-content-center align-items-center">
+            <h2 className="stat-number" data-value="16">0</h2>
+            <div className="stat-sign">+</div>
+
+            </div>
+            <p className="stat-desc">Years of Experience</p>
+
+          </div>
+          <div className="col-md-3 col-6">
+          <div className="d-flex justify-content-center align-items-center">
+            <h2 className="stat-number" data-value="50">0</h2>
+            <div className="stat-sign">+</div>
+            </div>
+            <p className="stat-desc">Completed Projects</p>
+          </div>
+          <div className="col-md-3 col-6">
+          <div className="d-flex justify-content-center align-items-center">
+            <h2 className="stat-number" data-value="150">0</h2>
+            <div className="stat-sign">+</div>
+            </div>
+            <p className="stat-desc">Professionals</p>
+          </div>
+          <div className="col-md-3 col-6">
+          <div className="d-flex justify-content-center align-items-center">
+            <h2 className="stat-number" data-value="4">0</h2>
+            <div className="stat-sign">+</div>
+            </div>
+            <p className="stat-desc">Countries Served</p>
+          </div>
+        </div>
       </div>
+    </div>
       {/*  growing business*/}
       <section className="growing-business">
         <Container className="xl">
