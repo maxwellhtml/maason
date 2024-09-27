@@ -2,10 +2,10 @@
     --light-bg-color:#F9FAFB;
     --fs-20: clamp(18px, 1.4vw, 20px);
 }
-.e-book-app {
+/* .e-book-app {
   background: #EFEFEF80;
   border-radius: 12px;
-}
+} */
 .section-color {
     background-color: var(--light-bg-color) !important;
 }
@@ -67,7 +67,7 @@ padding-inline: 15px;
 
   .developer-options .btn {
     background-color: #ffb074;
-    border-radius: 20px;
+    border-radius: 100px;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 600;
@@ -392,11 +392,13 @@ ul.technology-ul li {
 
 /* styles/globals.css */  
   .work-display {
-    background: url(/images/recent-work-bg.jpg);
+    background-color: #EFEFEF80;
+    background-image: url(/images/banner-image.png);
     border-radius: 10px;
     padding: 30px 30px 0px 30px;
     background-repeat: repeat;
     background-size: cover;
+        border-radius: 12px;
   }
   .recent-work-boxes {
     border-top: 4px solid #EAECF0;
@@ -433,7 +435,7 @@ ul.technology-ul li {
   @media (max-width: 1024px) {
     .developer-options .btn {
         background-color: #ffb074;
-        border-radius: 20px;
+        border-radius: 100px;
         padding: 10px 20px;
         font-size: 16px;
         font-weight: 600;
