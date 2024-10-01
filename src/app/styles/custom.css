@@ -89,6 +89,7 @@ padding-inline: 15px;
     margin-bottom: 0;
     color: #252422;
     text-decoration: none !important;
+    cursor: pointer;
   }
   #technologies-tabContent li a{
     text-decoration: none;
@@ -285,7 +286,7 @@ padding-inline: 15px;
   ul.technology-ul {
     display: flex;
     overflow: auto;
-    scrollbar-width: thin;
+    /* scrollbar-width: thin; */
     padding: 0;
 }
   .technologies-use-ul ::-webkit-scrollbar-track
@@ -299,14 +300,20 @@ padding-inline: 15px;
 {
 	width: 12px;
 	background-color: #F5F5F5;
+  height: 6px;
 }
 
 .technologies-use-ul ::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #D62929;
+	background-color: #CDCDCD;
 }
+.technologies-use-ul ::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  height: 20px;
+}
+
 ul.technology-ul li {
     list-style-type: none;
 }

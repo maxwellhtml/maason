@@ -290,7 +290,7 @@ const TechnologiesWeUse = () => {
               {/* <ul className="nav nav-tabs" id="technologies-tab" role="tablist"> */}
               <ul className='technology-ul'>
                   {technologyTab.map((tab) => (
-                    <li className='nav-item' role='presentation' key={tab.id}>
+                    <li className='nav-item'  role='presentation' key={tab.id}>
                       <h3
                         className={`mb-0 nav-link ${
                           activeTab === tab.id ? 'active' : ''

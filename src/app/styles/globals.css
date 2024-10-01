@@ -11,16 +11,6 @@
   --gray-color-200: #EAECF0;
   --gray-color-300: #EBEBEB;
   --white-color:#ffffff ;
-  /* --secondary-color: #475467; */
-  /* --link-color: ;
-  --highlight-color: #475467;
-
-  --heading-color:#252422 ;
-  --heading-color:#222222 ;
-  --body-color: ;
-  --border-width:1px; */
-  /*-------------font size--------------- */
-  /* --fs-xs: clamp(11px, 1vw, 12px); */
   --fs-xs: clamp(14px, 1vw, 14px);
   --fs-sm: clamp(16px, 1.4vw, 16px);
   --fs-base: clamp(14px, 1.4vw, 18px);
@@ -68,24 +58,7 @@ video {
 }
 body{font-family: unset;}
 /*---------------- font size css ------------------------- */
-/* .fs-8xl {
-  font-size: var(--fs-8xl);
-}
-.fs-7xl {
-  font-size: var(--fs-7xl);
-}
-.fs-6xl {
-  font-size: var(--fs-6xl);
-}
-.fs-5xl {
-  font-size: var(--fs-5xl);
-}
-.fs-4xl {
-  font-size: var(--fs-4xl);
-}
-.fs-3xl {
-  font-size: var(--fs-3xl);
-} */
+
 .fs-2xl {
   font-size: var(--fs-2xl);
 }
@@ -233,4 +206,22 @@ font-size: 32px;
       }
       section{padding-block: 40px}
       .btns{height: 40px;}
+}
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-image: none !important;
+    background-color: light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) !important;
+} */
+.form-control:focus{box-shadow: none;}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 0px 28px rgb(255, 255, 255)
 }

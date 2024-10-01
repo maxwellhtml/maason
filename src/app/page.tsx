@@ -31,70 +31,113 @@ interface FormErrors {
 }
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [phone, setPhone] = useState('');
-  const [error, setError] = useState<FormErrors>({});
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    services: ''
-  });
+const [phone, setPhone] = useState('');
+const [error, setError] = useState<FormErrors>({});
+const [formData, setFormData] = useState<FormData>({
+  name: '',
+  email: '',
+  phone: '',
+  services: '',
+});
 
-  const validateForm = () => {
-    const updatedFormData = { ...formData, phone };
-    let formErrors: FormErrors = {};
+const validateForm = () => {
+  let formErrors: FormErrors = {};
 
-    if (!updatedFormData.name) formErrors.name = true;
-    if (!updatedFormData.email || !/\S+@\S+\.\S+/.test(updatedFormData.email)) {
-      formErrors.email = true;
-    }
-    if (!updatedFormData.phone || updatedFormData.phone.length < 10) {
-      formErrors.phone = true;
-    }
-    if (!updatedFormData.services) formErrors.services = true;
+  if (!formData.name) formErrors.name = true;
+  if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+    formErrors.email = true;
+  }
+  if (!formData.phone || formData.phone.length < 10) {
+    formErrors.phone = true;
+  }
+  if (!formData.services) formErrors.services = true;
 
-    setError(formErrors);
-    return Object.keys(formErrors).length === 0; // Return true if no errors
-  };
+  setError(formErrors);
+  return Object.keys(formErrors).length === 0; // Return true if no errors
+};
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (!validateForm()) return; // Only proceed if the form is valid
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+  const updatedFormData = { ...formData, [name]: value };
 
-  };
+  // Update form data
+  setFormData(updatedFormData);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // Dynamically validate and clear errors for the specific field
+  let formErrors = { ...error }; // Copy existing errors
 
-    if (!validateForm()) return; // Only proceed if the form is valid
+  // Validate the specific field
+  if (name === 'name' && value) {
+    delete formErrors.name; // Clear error if valid
+  }
+  if (name === 'email' && /\S+@\S+\.\S+/.test(value)) {
+    delete formErrors.email; // Clear error if valid
+  }
+  if (name === 'phone' && value.length >= 10) {
+    delete formErrors.phone; // Clear error if valid
+  }
+  if (name === 'services' && value) {
+    delete formErrors.services; // Clear error if valid
+  }
 
-    setLoading(true);
+  setError(formErrors); // Set updated errors
+};
 
-    // Prepare the updated form data
-    const updatedFormData = { ...formData, phone };
+const handlePhoneChange = (phoneValue: string) => {
+  setPhone(phoneValue);
 
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-      const json = await response.json();
-      if (response.ok) {
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            services: ''
-        });
-        setPhone(''); // Clear the phone input here
+  // Update phone in formData
+  setFormData({ ...formData, phone: phoneValue });
+
+  // Dynamically clear the phone validation error if the length is >= 10
+  let formErrors = { ...error }; // Copy existing errors
+  if (phoneValue.length >= 10) {
+    delete formErrors.phone; // Clear the phone error
+  }
+
+  setError(formErrors); // Set updated errors
+};
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (!validateForm()) return; // Only proceed if the form is valid
+
+  setLoading(true);
+
+  // Prepare the updated form data
+  const updatedFormData = { ...formData, phone };
+
+  try {
+    const response = await fetch('https://aistimer2.aistechnolabs.in/test-me', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedFormData),
+    }).then((res) => res.json());
+
+    // Check if response status is a boolean
+    if (response.status === true) {
+      // Success handling
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        services: '',
+      });
+      setPhone(''); // Clear the phone input
+      console.log('Form submission successful', response);
     } else {
-        // Handle the error response if necessary
+      // Handle error
+      console.error('Error in submission:', response);
     }
-    console.log(json);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false); // Ensure loading is false on completion
-    }
-  };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    setLoading(false); // Ensure loading is false on completion
+  }
+};
 
 
   // counter function
@@ -224,7 +267,7 @@ export default function Home() {
                       defaultCountry="in"
                       className={`form-control align-items-center ${error.phone ? 'is-invalid' : ''}`}
                       value={phone}
-                      onChange={(phone) => setPhone(phone)}
+                      onChange={handlePhoneChange}
                     />
                     {error.phone && <div className="invalid-feedback">Invalid phone number</div>}
                   </div>
