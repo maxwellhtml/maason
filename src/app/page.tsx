@@ -118,7 +118,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     }).then((res) => res.json());
 
     // Check if response status is a boolean
-    if (response.status === true) {
+    if (response.success) {
       // Success handling
       setFormData({
         name: '',
